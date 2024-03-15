@@ -1,0 +1,48 @@
+# mapIt.py - Launches a map in the browser using an address from the
+# command line or clipboard. 
+
+#import webbrowser, sys
+#webbrowser.open('https://inventwithpython.com/')
+
+Downloading Files from the Web with the requests Module
+The requests module lets you easily download files from the web without having to worry about complicated issues such as network errors, connection problems, and data compression. 
+The requests module doesn’t come with Python, so you’ll have to install it first. From the command line, run pip install --user requests. (Appendix A has additional details on how to install third-party modules.)
+
+The requests module was written because Python’s urllib2 module is too complicated to use. 
+In fact, take a permanent marker and black out this entire paragraph. Forget I ever mentioned urllib2. If you need to download things from the web, just use the requests module.
+
+From here, you can save the web page to a file on your hard drive with the standard open() function and write() method. There are some slight differences, though. First, you must open the file in write binary mode by passing the string 'wb' as the second argument to open(). Even if the page is in plaintext (such as the Romeo and Juliet text you downloaded earlier), you need to write binary data instead of text data in order to maintain the Unicode encoding of the text.
+
+To write the web page to a file, you can use a for loop with the Response object’s iter_content() method.
+
+>>> import requests
+>>> res = requests.get('https://automatetheboringstuff.com/files/rj.txt')
+>>> res.raise_for_status()
+>>> playFile = open('RomeoAndJuliet.txt', 'wb')
+>>> for chunk in res.iter_content(100000):
+        playFile.write(chunk)
+
+UNICODE ENCODINGS
+
+Unicode encodings are beyond the scope of this book, but you can learn more about them from these web pages:
+
+Joel on Software: The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!): https://www.joelonsoftware.com/articles/Unicode.html
+Pragmatic Unicode: https://nedbatchelder.com/text/unipain.html
+
+The Single Most Important Fact About Encodings
+If you completely forget everything I just explained, please remember one extremely important fact. It does not make sense to have a string without knowing what encoding it uses. You can no longer stick your head in the sand and pretend that “plain” text is ASCII.
+There Ain’t No Such Thing As Plain Text.
+If you have a string, in memory, in a file, or in an email message, you have to know what encoding it is in or you cannot interpret it or display it to users correctly.
+
+
+To review, here’s the complete process for downloading and saving a file:
+
+Call requests.get() to download the file.
+Call open() with 'wb' to create a new file in write binary mode.
+Loop over the Response object’s iter_content() method.
+Call write() on each iteration to write the content to the file.
+Call close() to close the file.
+That’s all there is to the requests module! 
+The for loop and iter_content() stuff may seem complicated compared to the open()/write()/close() workflow you’ve been using to write text files, but it’s to ensure that the requests module doesn’t eat up too much memory even if you download massive files. 
+You can learn about the requests module’s other features from https://requests.readthedocs.org/.
+
