@@ -46,3 +46,10 @@ That’s all there is to the requests module!
 The for loop and iter_content() stuff may seem complicated compared to the open()/write()/close() workflow you’ve been using to write text files, but it’s to ensure that the requests module doesn’t eat up too much memory even if you download massive files. 
 You can learn about the requests module’s other features from https://requests.readthedocs.org/.
 
+Most boring tasks aren’t limited to the files on your computer. 
+Being able to programmatically download web pages will extend your programs to the internet. 
+The requests module makes downloading straightforward, and with some basic knowledge of HTML concepts and selectors, you can utilize the BeautifulSoup module to parse the pages you download.
+
+But to fully automate any web-based tasks, you need direct control of your web browser through the selenium module. 
+The selenium module will allow you to log in to websites and fill out forms automatically. 
+Since a web browser is the most common way to send and receive information over the internet, this is a great ability to have in your programmer toolkit.

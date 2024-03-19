@@ -1,0 +1,66 @@
+1. Briefly describe the differences between the webbrowser, requests, bs4, and selenium modules.
+webbrowser: This is a built-in Python module for dealing with web-related tasks. 
+It's not used to fetch web content, but rather to easily open web pages in a new browser window or tab. It's a simple way to let Python script interact with the web browser.
+
+requests: This is a third-party Python module used for making HTTP requests. 
+It abstracts the complexities of making requests behind a beautiful, simple API, allowing you to send HTTP/1.1 requests. 
+With it, you can add content like headers, form data, multipart files, and parameters to HTTP requests via simple Python libraries to HTTP requests.
+
+bs4 (BeautifulSoup4): This is a third-party Python library for parsing HTML and XML documents. 
+It's often used for web scraping. It creates a parse tree from page source code that can be used to extract data in a hierarchical and more readable manner.
+
+selenium: This is a powerful tool for controlling a web browser through the program. 
+It's most often used for automating web applications for testing purposes, but is certainly not limited to just that. 
+It can perform tasks such as clicking buttons, filling out forms, or anything else a human can do on a webpage. It's a bit overkill for simple web scraping tasks, but for complex tasks, it's incredibly useful.
+
+2. What type of object is returned by requests.get()? How can you access the downloaded content as a string value?
+The requests.get() function returns a Response object.
+You can access the downloaded content as a string value by calling the .text attribute of the Response object.
+
+3. What requests method checks that the download worked?
+The .raise_for_status() method checks that the download worked.
+
+4. How can you get the HTTP status code of a requests response?
+You can get the HTTP status code of a requests response by calling the .status_code attribute of the Response object.
+
+5. How do you save a requests response to a file?
+You can save a requests response to a file by opening a file in write-binary mode and writing the content of the response attribute to the file.
+
+6. What is the keyboard shortcut for opening a browser’s developer tools?
+The keyboard shortcut for opening a browser's developer tools is F12 or Ctrl+Shift+I.
+
+7. How can you view (in the developer tools) the HTML of a specific element on a web page?
+You can view the HTML of a specific element on a web page by right-clicking the element and selecting "Inspect" from the context menu.
+
+8. What is the CSS selector string that would find the element with an id attribute of main?
+The CSS selector string that would find the element with an id attribute of main is '#main'.
+
+9. What is the CSS selector string that would find the elements with a CSS class of highlight?
+The CSS selector string that would find the elements with a CSS class of highlight is '.highlight'.
+
+10. What is the CSS selector string that would find all the <div> elements inside another <div> element?
+The CSS selector string that would find all the <div> elements inside another <div> element is 'div div'.
+
+11. What is the CSS selector string that would find the <button> element with a value attribute set to favorite?
+The CSS selector string that would find the <button> element with a value attribute set to favorite is 'button[value="favorite"]'.
+
+12. Say you have a Beautiful Soup Tag object stored in the variable spam for the element <div>Hello, world!</div>. How could you get a string 'Hello, world!' from the Tag object?
+You could get a string 'Hello, world!' from the Tag object by calling the .getText() method of the Tag object.
+
+13. How would you store all the attributes of a Beautiful Soup Tag object in a variable named linkElem?
+You would store all the attributes of a Beautiful Soup Tag object in a variable named linkElem by calling the .attrs attribute of the Tag object.
+
+14. Running import selenium doesn't work. How do you properly import the selenium module?
+You can properly import the selenium module by running from selenium import webdriver.
+
+15. What's the difference between the find_element_* and find_elements_* methods in Selenium?
+The find_element_* methods return the first matching element as a WebElement object, while the find_elements_* methods return a list of all matching elements as WebElement objects.
+
+16. What methods do Selenium's WebElement objects have for simulating mouse clicks and keyboard keys?
+Selenium's WebElement objects have the click() method for simulating mouse clicks and the send_keys() method for simulating keyboard keys.
+
+17. You could call send_keys(Keys.ENTER) on an element by importing it from which Selenium package?
+You could call send_keys(Keys.ENTER) on an element by importing it from the selenium.webdriver.common.keys package.
+
+18. How can you simulate clicking a browser's Forward, Back, and Refresh buttons with Selenium?
+You can simulate clicking a browser's Forward, Back, and Refresh buttons with Selenium by calling the forward(), back(), and refresh() methods of the WebDriver object, respectively.
