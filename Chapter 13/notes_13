@@ -1,0 +1,8 @@
+https://www.reddit.com/r/learnpython/comments/170612s/does_anyone_still_use_openpyxl/
+
+Use Pandas for read operations: https://www.digitalocean.com/community/tutorials/pandas-read_excel-reading-excel-file-in-python
+
+If your goal is to create an Excel file I think you're far better off with xlsxwriter, it has a pretty rich feature set (styles, conditional formatting) and is easy to use. 
+It also allows you to define named ranges.
+
+But unlike openpyxl it cannot read Excel files. I prefer xlsxwriter over openpyxl pretty much all the time if I need to create Excel output.
