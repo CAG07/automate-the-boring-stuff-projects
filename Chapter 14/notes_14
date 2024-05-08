@@ -1,0 +1,16 @@
+To upload an existing Excel, OpenOffice, CSV, or TSV spreadsheet to Google Sheets, pass the filename of the spreadsheet to ezsheets.upload(). Enter the following into the interactive shell, replacing my_spreadsheet.xlsx with a spreadsheet file of your own:
+
+>>> import ezsheets
+>>> ss = ezsheets.upload('my_spreadsheet.xlsx')
+>>> ss.title
+'my_spreadsheet'
+
+The upload() function returns the Spreadsheet object for the newly uploaded spreadsheet. You can then use this object to work with the spreadsheet in your Python code.
+
+Note that files in the CSV and TSV formats can contain only one sheet; therefore, if you download a Google Sheets spreadsheet in this format, you will get the first sheet only. 
+To download other sheets, you’ll need to change the Sheet object’s index attribute to 0. See “Creating and Deleting Sheets” on page 341 for information on how to do this.
+
+Working with Google Sheets Quotas
+Because Google Sheets is online, it’s easy to share sheets among multiple users who can all access the sheets simultaneously. However, this also means that reading and updating the sheets will be slower than reading and updating Excel files stored locally on your hard drive. In addition, Google Sheets has limits on how many read and write operations you can perform.
+
+According to Google’s developer guidelines, users are restricted to creating 250 new spreadsheets a day, and free Google accounts can perform 100 read and 100 write requests per 100 seconds. Attempting to exceed this quota will raise the googleapiclient.errors.HttpError “Quota exceeded for quota group” exception. EZSheets will automatically catch this exception and retry the request.
