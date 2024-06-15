@@ -1,0 +1,58 @@
+PDFs are binary
+PyPDF2 is deprecated since December 2022. Use pypdf (as the README of PyPDF2 states)
+
+python-docx is a Python library for creating and updating Microsoft Word (.docx) files.
+https://pypi.org/project/python-docx/
+
+Getting the Full Text from a .docx File
+If you care only about the text, not the styling information, in the Word document, you can use the getText() function. It accepts a filename of a .docx file and returns a single string value of its text. 
+
+```
+#! python3
+
+import docx
+
+def getText(filename):
+    doc = docx.Document(filename)
+    fullText = []
+    for para in doc.paragraphs:
+        fullText.append(para.text)
+    return '\n'.join(fullText)
+```
+
+Run Attributes
+Runs can be further styled using text attributes. 
+Each attribute can be set to one of three values: 
+True (the attribute is always enabled, no matter what other styles are applied to the run), 
+False (the attribute is always disabled), or None (defaults to whatever the run’s style is set to).
+
+Writing Word Documents
+>>> import docx
+>>> doc = docx.Document()
+>>> doc.add_paragraph('Hello, world!')
+<docx.text.Paragraph object at 0x0000000003B56F60>
+>>> doc.save('helloworld.docx')
+
+Creating PDFs from Word Documents
+The PyPDF2 module doesn’t allow you to create PDF documents directly, but there’s a way to generate PDF files with Python if you’re on Windows and have Microsoft Word installed. You’ll need to install the Pywin32 package by running pip install --user -U pywin32==224. With this and the docx module, you can create Word documents and then convert them to PDFs with the following script.
+
+Open a new file editor tab, enter the following code, and save it as convertWordToPDF.py:
+```
+# This script runs on Windows only, and you must have Word installed.
+import win32com.client # install with "pip install pywin32==224"
+import docx
+wordFilename = 'your_word_document.docx'
+pdfFilename = 'your_pdf_filename.pdf'
+
+doc = docx.Document()
+# Code to create Word document goes here. Replace with docx function calls to create your own content for the PDF in a Word document.
+doc.save(wordFilename)
+
+wdFormatPDF = 17 # Word's numeric code for PDFs.
+wordObj = win32com.client.Dispatch('Word.Application')
+
+docObj = wordObj.Documents.Open(wordFilename)
+docObj.SaveAs(pdfFilename, FileFormat=wdFormatPDF)
+docObj.Close()
+wordObj.Quit()
+```
