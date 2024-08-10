@@ -1,0 +1,44 @@
+Here I’m calling time.time() on December 2, 2018, at 9:11 PM Pacific Standard Time. The return value is how many seconds have passed between the Unix epoch and the moment time.time() was called.
+
+Epoch timestamps can be used to profile code, that is, measure how long a piece of code takes to run. If you call time.time() at the beginning of the code block you want to measure and again at the end, you can subtract the first timestamp from the second to find the elapsed time between those two calls. For example, open a new file editor tab and enter the following program:
+
+    import time
+➊ def calcProd():
+       # Calculate the product of the first 100,000 numbers.
+       product = 1
+       for i in range(1, 100000):
+           product = product * i
+       return product
+
+➋ startTime = time.time()
+   prod = calcProd()
+➌ endTime = time.time()
+➍ print('The result is %s digits long.' % (len(str(prod))))
+➎ print('Took %s seconds to calculate.' % (endTime - startTime))
+
+
+The return value from time.time() is useful, but not human-readable. The time.ctime() function returns a string description of the current time. You can also optionally pass the number of seconds since the Unix epoch, as returned by time.time(), to get a string value of that time. Enter the following into the interactive shell:
+
+>>> import time
+>>> time.ctime()
+'Mon Jun 15 14:00:38 2020'
+>>> thisMoment = time.time()
+>>> time.ctime(thisMoment)
+'Mon Jun 15 14:00:45 2020'
+
+The time.sleep() function will pause your program for a number of seconds. This can be useful when you want your program to wait for a short amount of time before continuing. For example, enter the following into the interactive shell:
+
+Rounding Numbers
+When working with times, you’ll often encounter float values with many digits after the decimal. To make these values easier to work with, you can shorten them with Python’s built-in round() function, which rounds a float to the precision you specify. Just pass in the number you want to round, plus an optional second argument representing how many digits after the decimal point you want to round it to. If you omit the second argument, round() rounds your number to the nearest whole integer. Enter the following into the interactive shell:
+
+>>> import time
+>>> now = time.time()
+>>> now
+1543814036.6147408
+>>> round(now, 2)
+1543814036.61
+>>> round(now, 4)
+1543814036.6147
+>>> round(now)
+1543814037
+
