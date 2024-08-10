@@ -1,0 +1,16 @@
+1. What is the Unix epoch?
+The Unix epoch is a time reference commonly used in programming: 12:00 a.m. on January 1, 1970, Coordinated Universal Time (UTC). It is the point from which all other times are calculated.
+2. What function returns the number of seconds that have passed since the Unix epoch?
+The time.time() function returns the number of seconds that have passed since the Unix epoch.
+3. How can you pause your program for exactly 5 seconds?
+You can pause your program for exactly 5 seconds by calling time.sleep(5).
+4. What does the round() function return?
+The round() function returns a floating-point number rounded to the nearest whole number or to the number of decimal places specified.
+5. What is the difference between a datetime object and a timedelta object?
+A datetime object represents a specific moment in time, while a timedelta object represents a duration of time.
+6. Using the datetime module, what day of the week was January 7, 2019?
+To determine the day of the week for January 7, 2019, you can create a datetime object for that date and use the .weekday() method to get the day of the week (0 for Monday, 1 for Tuesday, etc.).
+7. Say you have a function named spam(). How can you call this function and run the code inside it in a separate thread?
+You can call the spam() function and run the code inside it in a separate thread by using the threading.Thread() class and passing the spam() function as the target argument.
+What should you do to avoid concurrency issues with multiple threads?
+To avoid concurrency issues with multiple threads, you can use locks, semaphores, or other synchronization mechanisms provided by the threading module to control access to shared resources.

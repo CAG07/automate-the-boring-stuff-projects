@@ -42,3 +42,83 @@ When working with times, you’ll often encounter float values with many digits 
 >>> round(now)
 1543814037
 
+The timedelta Data Type
+The datetime module also provides a timedelta data type, which represents a duration of time rather than a moment in time. Enter the following into the interactive shell:
+
+➊ >>> delta = datetime.timedelta(days=11, hours=10, minutes=9, seconds=8)
+➋ >>> delta.days, delta.seconds, delta.microseconds
+   (11, 36548, 0)
+   >>> delta.total_seconds()
+   986948.0
+   >>> str(delta)
+   '11 days, 10:09:08'
+
+To create a timedelta object, use the datetime.timedelta() function. The datetime.timedelta() function takes keyword arguments weeks, days, hours, minutes, seconds, milliseconds, and microseconds. 
+There is no month or year keyword argument, because “a month” or “a year” is a variable amount of time depending on the particular month or year.
+
+
+Pausing Until a Specific Date
+The time.sleep() method lets you pause a program for a certain number of seconds. By using a while loop, you can pause your programs until a specific date. For example, the following code will continue to loop until Halloween 2016:
+
+import datetime
+import time
+halloween2016 = datetime.datetime(2016, 10, 31, 0, 0, 0)
+while datetime.datetime.now() < halloween2016:
+    time.sleep(1)
+
+Converting datetime Objects into Strings
+Epoch timestamps and datetime objects aren’t very friendly to the human eye. Use the strftime() method to display a datetime object as a string. (The f in the name of the strftime() function stands for format.)
+
+The strftime() method uses directives similar to Python’s string formatting. Table 17-1 has a full list of strftime() directives.
+
+Reference:
+Table17-1_strftime.png
+
+Converting Strings into datetime Objects
+If you have a string of date information, such as '2019/10/21 16:29:00' or 'October 21, 2019', and need to convert it to a datetime object, use the datetime.datetime.strptime() function. The strptime() function is the inverse of the strftime() method. A custom format string using the same directives as strftime() must be passed so that strptime() knows how to parse and understand the string. (The p in the name of the strptime() function stands for parse.)
+
+Enter the following into the interactive shell:
+
+➊ >>> datetime.datetime.strptime('October 21, 2019', '%B %d, %Y')
+   datetime.datetime(2019, 10, 21, 0, 0)
+   >>> datetime.datetime.strptime('2019/10/21 16:29:00', '%Y/%m/%d %H:%M:%S')
+   datetime.datetime(2019, 10, 21, 16, 29)
+   >>> datetime.datetime.strptime("October of '19", "%B of '%y")
+   datetime.datetime(2019, 10, 1, 0, 0)
+   >>> datetime.datetime.strptime("November of '63", "%B of '%y")
+   datetime.datetime(2063, 11, 1, 0, 0)
+
+Concurrency Issues
+You can easily create several new threads and have them all running at the same time. But multiple threads can also cause problems called concurrency issues. 
+These issues happen when threads read and write variables at the same time, causing the threads to trip over each other. 
+Concurrency issues can be hard to reproduce consistently, making them hard to debug.
+
+Multithreaded programming is its own wide subject and beyond the scope of this book. 
+What you have to keep in mind is this: to avoid concurrency issues, never let multiple threads read or write the same variables. 
+When you create a new Thread object, make sure its target function uses only local variables in that function. This will avoid hard-to-debug concurrency issues in your programs.
+
+Every process can have multiple threads. Unlike threads, a process cannot directly read and write another process’s variables. If you think of a multithreaded program as having multiple fingers following source code, then having multiple processes of the same program open is like having a friend with a separate copy of the program’s source code. You are both independently executing the same program.
+
+If you want to start an external program from your Python script, pass the program’s filename to subprocess.Popen(). (On Windows, right-click the application’s Start menu item and select Properties to view the application’s filename. On macOS, CTRL-click the application and select Show Package Contents to find the path to the executable file.) The Popen() function will then immediately return. Keep in mind that the launched program is not run in the same thread as your Python program.
+
+On a Windows computer, enter the following into the interactive shell:
+
+>>> import subprocess
+>>> subprocess.Popen('C:\\Windows\\System32\\calc.exe')
+<subprocess.Popen object at 0x0000000003055A58>
+
+On Ubuntu Linux, you would enter the following:
+
+>>> import subprocess
+>>> subprocess.Popen('/snap/bin/gnome-calculator')
+<subprocess.Popen object at 0x7f2bcf93b20>
+
+On macOS, the process is slightly different. See “Opening Files with Default Applications” on page 409.
+
+Running Other Python Scripts
+You can launch a Python script from Python just like any other application. Simply pass the python.exe executable to Popen() and the filename of the .py script you want to run as its argument. For example, the following would run the hello.py script from Chapter 1:
+
+>>> subprocess.Popen(['C:\\Users\\<YOUR USERNAME>\\AppData\\Local\\Programs\\
+Python\\Python38\\python.exe', 'hello.py'])
+<subprocess.Popen object at 0x000000000331CF28>
+Unlike importing the Python program as a module, when your Python program launches another Python program, the two are run in separate processes and will not be able to share each other’s variables.
