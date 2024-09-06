@@ -1,0 +1,50 @@
+pip install --user -U pillow
+
+In Pillow, RGBA values are represented by a tuple of four integer values. For example, the color red is represented by (255, 0, 0, 255). This color has the maximum amount of red, no green or blue, and the maximum alpha value, meaning it is fully opaque. Green is represented by (0, 255, 0, 255), and blue is (0, 0, 255, 255). White, the combination of all colors, is (255, 255, 255, 255), while black, which has no color at all, is (0, 0, 0, 255).
+If a color has an alpha value of 0, it is invisible, and it doesn’t really matter what the RGB values are. After all, invisible red looks the same as invisible black.
+
+ The first zero represents the x-coordinate, which starts at zero at the origin and increases going from left to right. 
+ The second zero represents the y-coordinate, which starts at zero at the origin and increases going down the image. 
+ This bears repeating: y-coordinates increase going downward, which is the opposite of how you may remember y-coordinates being used in math class.
+
+Despite their names, the copy() and paste() methods in Pillow do not use your computer’s clipboard.
+
+Note that the paste() method modifies its Image object in place; it does not return an Image object with the pasted image. If you want to call paste() but also keep an untouched version of the original image around, you’ll need to first copy the image and then call paste() on that copy.
+
+Resizing an Image
+The resize() method is called on an Image object and returns a new Image object of the specified width and height. It accepts a two-integer tuple argument, representing the new width and height of the returned image. Enter the following into the interactive shell:
+
+   >>> from PIL import Image
+   >>> catIm = Image.open('zophie.png')
+➊ >>> width, height = catIm.size
+➋ >>> quartersizedIm = catIm.resize((int(width / 2), int(height / 2)))
+   >>> quartersizedIm.save('quartersized.png')
+➌ >>> svelteIm = catIm.resize((width, height + 300))
+   >>> svelteIm.save('svelte.png')
+
+Rotating and Flipping Images
+Images can be rotated with the rotate() method, which returns a new Image object of the rotated image and leaves the original Image object unchanged. The argument to rotate() is a single integer or float representing the number of degrees to rotate the image counterclockwise. Enter the following into the interactive shell:
+
+>>> from PIL import Image
+>>> catIm = Image.open('zophie.png')
+>>> catIm.rotate(90).save('rotated90.png')
+>>> catIm.rotate(180).save('rotated180.png')
+>>> catIm.rotate(270).save('rotated270.png')
+
+Note how you can chain method calls by calling save() directly on the Image object returned from rotate(). The first rotate() and save() call makes a new Image object representing the image rotated counterclockwise by 90 degrees and saves the rotated image to rotated90.png. The second and third calls do the same, but with 180 degrees and 270 degrees. 
+
+Drawing on Images
+If you need to draw lines, rectangles, circles, or other simple shapes on an image, use Pillow’s ImageDraw module. Enter the following into the interactive shell:
+
+>>> from PIL import Image, ImageDraw
+>>> im = Image.new('RGBA', (200, 200), 'white')
+>>> draw = ImageDraw.Draw(im)
+
+Summary
+Images consist of a collection of pixels, and each pixel has an RGBA value for its color and its addressable by x- and y-coordinates. Two common image formats are JPEG and PNG. The pillow module can handle both of these image formats and others.
+
+When an image is loaded into an Image object, its width and height dimensions are stored as a two-integer tuple in the size attribute. Objects of the Image data type also have methods for common image manipulations: crop(), copy(), paste(), resize(), rotate(), and transpose(). To save the Image object to an image file, call the save() method.
+
+If you want your program to draw shapes onto an image, use ImageDraw methods to draw points, lines, rectangles, ellipses, and polygons. The module also provides methods for drawing text in a typeface and font size of your choosing.
+
+Although advanced (and expensive) applications such as Photoshop provide automatic batch processing features, you can use Python scripts to do many of the same modifications for free.

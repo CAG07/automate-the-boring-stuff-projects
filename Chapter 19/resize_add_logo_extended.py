@@ -1,6 +1,5 @@
-#!/usr/bin/env python3
-
-"""Resize all images in CWD to fit in a 300x300 square and add logo to lower left."""
+#Resize and add logo
+#Resize all images in CWD to fit in a 300x300 square and add logo to lower left.
 
 import os
 from PIL import Image
@@ -22,6 +21,11 @@ for filename in os.listdir('.'):
     im = Image.open(filename)
     width, height = im.size
 
+    #Resize the logo
+    print(f'Resizing logo to fit {filename}...')
+    logo_im = logo_im.resize((int(width/20), int(height/20)))
+    logo_width, logo_height = logo_im.size
+
     # Check if image needs to be resized.
     if width > SQUARE_FIT_SIZE and height > SQUARE_FIT_SIZE:
         # Calculate the new width and height to resize to.
@@ -38,13 +42,13 @@ for filename in os.listdir('.'):
 
     # Add the logo if the image size is large enough for it to look good.
     width, height = im.size
-    if width < logo_width * 2 or height < logo_height * 2:
-        print("The logo wouldn't look good on an image this size so "
-              "it is being skipped. The unadorned image will still be saved "
-              "to the 'withLogo' directory.")
-    else:
-        print('Adding logo to {}...'.format(filename))
-        im.paste(logo_im, (width - logo_width, height - logo_height), logo_im)
+    #if width < logo_width * 2 or height < logo_height * 2:
+    #    print("The logo wouldn't look good on an image this size so "
+    #          "it is being skipped. The unadorned image will still be saved "
+    #          "to the 'withLogo' directory.")
+    #else:
+    print('Adding logo to {}...'.format(filename))
+    im.paste(logo_im, (width - logo_width, height - logo_height), logo_im)
 
     # Save changes.
     im.save(os.path.join('withLogo', filename))
