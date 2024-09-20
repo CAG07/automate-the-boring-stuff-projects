@@ -26,3 +26,38 @@ Size(width=1920, height=1080)
 
 The pyautogui.size() function returns (1920, 1080) on a computer with a 1920×1080 resolution; depending on your screen’s resolution, your return value may be different.
 
+Hotkey Combinations
+A hotkey or shortcut is a combination of keypresses to invoke some application function. The common hotkey for copying a selection is CTRL-C (on Windows and Linux) or image-C (on macOS). The user presses and holds the CTRL key, then presses the C key, and then releases the C and CTRL keys. To do this with PyAutoGUI’s keyDown() and keyUp() functions, you would have to enter the following:
+
+pyautogui.keyDown('ctrl')
+pyautogui.keyDown('c')
+pyautogui.keyUp('c')
+pyautogui.keyUp('ctrl')
+
+This is rather complicated. Instead, use the pyautogui.hotkey() function, which takes multiple keyboard key string arguments, presses them in order, and releases them in the reverse order. For the CTRL-C example, the code would simply be as follows:
+
+pyautogui.hotkey('ctrl', 'c')
+
+
+Getting the Mouse Position
+You can determine the mouse’s current position by calling the pyautogui.position() function, which will return a Point named tuple of the mouse cursor’s x and y positions at the time of the function call. 
+
+You should see the mouse pointer move to near the top-left corner of your screen and click once. A full “click” is defined as pushing a mouse button down and then releasing it back up without moving the cursor. You can also perform a click by calling pyautogui.mouseDown(), which only pushes the mouse button down, and pyautogui.mouseUp(), which only releases the button. These functions have the same arguments as click(), and in fact, the click() function is just a convenient wrapper around these two function calls.
+
+PyAutoGUI provides the pyautogui.dragTo() and pyautogui.drag() functions to drag the mouse cursor to a new location or a location relative to its current one. The arguments for dragTo() and drag() are the same as moveTo() and move():
+
+Scrolling the Mouse
+The final PyAutoGUI mouse function is scroll(), which you pass an integer argument for how many units you want to scroll the mouse up or down. 
+
+In the interactive shell, call the pyautogui.getActiveWindow() function to get a Window object (technically a Win32Window object when run on Windows).
+
+Setting Up Your GUI Automation Scripts
+GUI automation scripts are a great way to automate the boring stuff, but your scripts can also be finicky. If a window is in the wrong place on a desktop or some pop-up appears unexpectedly, your script could be clicking on the wrong things on the screen. Here are some tips for setting up your GUI automation scripts:
+
+Use the same screen resolution each time you run the script so that the position of windows doesn’t change.
+The application window that your script clicks should be maximized so that its buttons and menus are in the same place each time you run the script.
+Add generous pauses while waiting for content to load; you don’t want your script to begin clicking before the application is ready.
+Use locateOnScreen() to find buttons and menus to click, rather than relying on XY coordinates. If your script can’t find the thing it needs to click, stop the program rather than let it continue blindly clicking.
+Use getWindowsWithTitle() to ensure that the application window you think your script is clicking on exists, and use the activate() method to put that window in the foreground.
+Use the logging module from Chapter 11 to keep a log file of what your script has done. This way, if you have to stop your script halfway through a process, you can change it to pick up from where it left off.
+Add as many checks as you can to your script. Think about how it could fail if an unexpected pop-up window appears or if your computer loses its internet connection.
