@@ -1,0 +1,28 @@
+This chapter covers only a subset of PyAutoGUI’s features; you can find the full documentation at https://pyautogui.readthedocs.io/.
+
+Installing the pyautogui Module
+The pyautogui module can send virtual keypresses and mouse clicks to Windows, macOS, and Linux. Windows and macOS users can simply use pip to install PyAutoGUI. However, Linux users will first have to install some software that PyAutoGUI depends on. Open a terminal window and enter the following commands:
+
+sudo apt-get install scrot
+sudo apt-get install python3-tk
+sudo apt-get install python3-dev
+To install PyAutoGUI, run pip install --user pyautogui
+
+Setting Up Accessibility Apps on macOS
+As a security measure, macOS doesn’t normally let programs control the mouse or keyboard. To make PyAutoGUI work on macOS, you must set the program running your Python script to be an accessibility application. Without this step, your PyAutoGUI function calls will have no effect.
+
+Whether you run your Python programs from Mu, IDLE, or the Terminal, have that application open. Then open the System Preferences and go to the Accessibility tab. The currently open applications will appear under the “Allow the apps below to control your computer” label. Check Mu, IDLE, Terminal, or whichever app you use to run your Python scripts. You’ll be prompted to enter your password to confirm these changes.
+
+The pyautogui.size() function returns a two-integer tuple of the screen’s width and height in pixels. Enter the following into the interactive shell:
+
+>>> import pyautogui
+>>> wh = pyautogui.size() # Obtain the screen resolution.
+>>> wh
+Size(width=1920, height=1080)
+>>> wh[0]
+1920
+>>> wh.width
+1920
+
+The pyautogui.size() function returns (1920, 1080) on a computer with a 1920×1080 resolution; depending on your screen’s resolution, your return value may be different.
+
