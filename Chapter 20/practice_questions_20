@@ -1,0 +1,41 @@
+1. How can you trigger PyAutoGUI's fail-safe to stop a program?
+You can trigger PyAutoGUI's fail-safe to stop a program by moving the mouse cursor to one of the four corners of the screen. 
+This will raise a pyautogui.FailSafeException exception, which will stop the program.
+
+2. What function returns the current screen resolution?
+The pyautogui.size() function returns the current screen resolution as a two-integer tuple of the screen's width and height in pixels.
+
+3. What function returns the coordinates of the mouse cursor's current position?
+The pyautogui.position() function returns the coordinates of the mouse cursor's current position as a Point named tuple of the x and y positions.
+
+4. What is the difference between pyautogui.moveTo() and pyautogui.move()?
+The pyautogui.moveTo() function moves the mouse cursor to an absolute position on the screen, while the pyautogui.move() function moves the mouse cursor relative to its current position.
+
+5. What functions can be used to drag the mouse?
+The pyautogui.dragTo() and pyautogui.drag() functions can be used to drag the mouse cursor to a new location or a location relative to its current position.
+
+6. What function call will type out the characters of "Hello, world!"?
+The pyautogui.typewrite() function call with the argument 'Hello, world!' will type out the characters of "Hello, world!".
+
+7. How can you do keypresses for special keys such as the keyboard's left arrow key?
+You can do keypresses for special keys such as the keyboard's left arrow key by passing the key name as a string argument to the pyautogui.press() function. 
+For example, to press the left arrow key, you would use pyautogui.press('left').
+
+8. How can you save the current contents of the screen to an image file named screenshot.png?
+You can save the current contents of the screen to an image file named screenshot.png by calling the pyautogui.screenshot() function and passing the file name as an argument.
+
+9. What code would set a two-second pause after every PyAutoGUI function call?
+You can set a two-second pause after every PyAutoGUI function call by calling the pyautogui.PAUSE() function with the argument 2.
+
+10. If you want to automate clicks and keystrokes inside a web browser, should you use PyAutoGUI or Selenium?
+If you want to automate clicks and keystrokes inside a web browser, you should use Selenium.
+
+11. What makes PyAutoGUI error-prone?
+PyAutoGUI is error-prone because it relies on the screen's resolution and the position of windows, which can change.
+
+12. How can you find the size of every window on the screen that includes the text Notepad in its title?
+You can find the size of every window on the screen that includes the text Notepad in its title by calling the pyautogui.getWindowsWithTitle() function with the argument 'Notepad'. 
+This will return a list of Window objects that match the specified title.
+
+13. How can you make, say, the Firefox browser active and in front of every other window on the screen?
+You can make the Firefox browser active and in front of every other window on the screen by calling the activate() method on the Window object representing the Firefox browser.
